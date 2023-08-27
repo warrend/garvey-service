@@ -1,0 +1,38 @@
+{
+  "name": "garvy-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "compile": "tsc",
+    "start": "npm run compile && node ./dist/index.js",
+    "migrate": "node-pg-migrate",
+    "dev": "npm run compile && nodemon --watch src --ext ts,js,graphql ./dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/server": "^4.9.1",
+    "dotenv": "^16.3.1",
+    "graphql": "^16.8.0",
+    "i": "^0.3.7",
+    "node-pg-migrate": "^6.2.2",
+    "npm": "^9.8.1",
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "@graphql-tools/graphql-file-loader": "^8.0.0",
+    "@graphql-tools/load": "^8.0.0",
+    "@graphql-tools/merge": "^9.0.0",
+    "@graphql-tools/mock": "^9.0.0",
+    "@graphql-tools/schema": "^10.0.0",
+    "@types/graphql": "^14.5.0",
+    "@types/node": "^20.5.0",
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "@typescript-eslint/parser": "^6.4.0",
+    "nodemon": "^3.0.1",
+    "typescript": "^5.1.6"
+  }
+}

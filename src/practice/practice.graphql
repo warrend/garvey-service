@@ -1,0 +1,39 @@
+#import Case from '../case/case.graphql'
+
+type Doctor {
+  id: ID!
+  name: String!
+  practice: Location!
+}
+type Patient {
+  id: ID!
+  name: String!
+}
+type Location {
+  id: ID!
+  name: String!
+  address: Address
+  cases: [Case]
+}
+type Address {
+  street: String!
+  city: String!
+  state: String!
+  zip: String!
+}
+type Query {
+  locations: [Location]
+  patients: [Patient]
+  doctors: [Doctor]
+  practiceName: String!
+  getPatient(id: ID!): Patient
+  getDoctor(id: ID!): Doctor
+  getCaseById(id: ID!): Case
+  cases: [Case]
+}
+input CreatePatientInput {
+  name: String!
+}
+type Mutation {
+  createPatient(input: CreatePatientInput!): Patient!
+}

@@ -1,0 +1,81 @@
+#import Doctor from '../practice/practice.graphql'
+#import Patient from '../practice/practice.graphql'
+
+type Case {
+  id: ID!
+  doctor: Doctor!
+  patient: Patient!
+  caseDate: String!
+  productType: ProductType!
+  notes: String
+  status: CaseStatus!
+  createdAt: String!
+}
+
+type ProductType {
+  id: ID!
+  name: String!
+}
+
+enum CaseStatus {
+  OPEN
+  CLOSED
+  IN_PROGRESS
+  SHIPPED
+  SHIPPING
+  ARRIVED
+  SHIPPING_TODAY
+}
+
+type Query {
+  getCasesArrivingToday: [Case]
+}
+
+input CreateCaseInput {
+  doctor: ID!
+  patient: ID!
+  caseDate: String!
+  productType: ID!
+  notes: String
+  status: CaseStatus!
+  createdAt: String!
+}
+
+input UpdateCaseInput {
+  doctor: ID
+  patient: ID
+  caseDate: String
+  productType: ID
+  notes: String
+  status: CaseStatus
+  createdAt: String
+}
+
+interface Error {
+  message: String!
+}
+
+type UpdateCaseResponse {
+  success: UpdateCaseSuccess
+  error: UpdateCaseError
+}
+
+type UpdateCaseSuccess {
+  updateCase: Case!
+}
+
+type FieldError {
+  field: String!
+  message: String!
+}
+
+type UpdateCaseError implements Error {
+  message: String!
+  inputErrors: [FieldError!]
+}
+
+type Mutation {
+  createCase(input: CreateCaseInput!): Case
+  updateCase(input: UpdateCaseInput!, id: ID!): UpdateCaseResponse
+  deleteCase(id: ID!): ID
+}
